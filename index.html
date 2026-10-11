@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#101020">
+<title>AURORA // Growth Dashboard</title>
+<style>
+:root{--bg:#0a0b16;--panel:rgba(22,24,48,.76);--line:rgba(177,178,255,.17);--text:#f3f4ff;--muted:#9b9fbd;--cyan:#61f0e1;--violet:#a58bff;--pink:#ff7fc9;--gold:#ffd78a;--danger:#ff7f91}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;color:var(--text);font-family:Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Arial;background:radial-gradient(ellipse at 8% 8%,rgba(93,66,190,.27),transparent 34%),radial-gradient(ellipse at 92% 18%,rgba(27,192,180,.17),transparent 29%),radial-gradient(ellipse at 55% 100%,rgba(226,90,171,.12),transparent 35%),var(--bg);min-height:100vh}
+body:before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.22;background-image:linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);background-size:42px 42px;mask-image:linear-gradient(to bottom,black,transparent 88%);z-index:-1}
+.wrap{max-width:1240px;margin:auto;padding:28px 22px 54px}.top{display:flex;justify-content:space-between;align-items:center;gap:18px;margin-bottom:28px}.brand{display:flex;align-items:center;gap:13px}.logo{width:46px;height:46px;border-radius:15px;background:linear-gradient(135deg,var(--cyan),var(--violet) 58%,var(--pink));display:grid;place-items:center;color:#111326;font-size:22px;font-weight:900;box-shadow:0 8px 35px #8c80ff35}.brand h1{font-size:16px;letter-spacing:.16em;margin:0}.brand p{font-size:11px;letter-spacing:.19em;color:var(--muted);margin:5px 0 0}.pill{border:1px solid var(--line);background:#17182d9c;border-radius:999px;padding:9px 13px;color:#c7c8e6;font-size:12px;white-space:nowrap}.hero{display:grid;grid-template-columns:1.3fr .7fr;gap:18px;margin-bottom:18px}.glass{border:1px solid var(--line);background:linear-gradient(145deg,rgba(29,31,61,.86),rgba(14,16,32,.82));border-radius:25px;box-shadow:0 22px 60px #0003;backdrop-filter:blur(18px)}.hero-main{padding:30px;position:relative;overflow:hidden}.hero-main:after{content:"";position:absolute;width:270px;height:270px;right:-80px;top:-115px;border-radius:50%;background:radial-gradient(circle,rgba(97,240,225,.2),transparent 68%);pointer-events:none}.eyebrow{color:var(--cyan);font-size:11px;font-weight:800;letter-spacing:.2em;text-transform:uppercase}.hero h2{font-size:clamp(28px,4vw,46px);letter-spacing:-.045em;line-height:1.07;margin:14px 0 12px;max-width:620px}.hero h2 span{background:linear-gradient(90deg,var(--cyan),var(--violet),var(--pink));color:transparent;background-clip:text}.sub{color:var(--muted);font-size:14px;line-height:1.65;max-width:570px}.hero-side{padding:25px;display:flex;flex-direction:column;justify-content:space-between;min-height:245px}.small-label{font-size:11px;color:var(--muted);letter-spacing:.12em;text-transform:uppercase}.big-num{font-size:clamp(32px,4vw,44px);font-weight:800;letter-spacing:-.04em;margin:8px 0}.gradient-text{background:linear-gradient(90deg,var(--gold),var(--pink));color:transparent;background-clip:text}.target-row{display:flex;justify-content:space-between;align-items:center;gap:12px;border-top:1px solid var(--line);padding-top:17px;margin-top:12px}.target-row strong{font-size:18px}.layout{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:18px}.card{padding:24px}.card-head{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;margin-bottom:20px}.card h3{margin:0;font-size:17px;letter-spacing:-.02em}.card-head p{margin:6px 0 0;color:var(--muted);font-size:12px;line-height:1.5}.iconbox{height:36px;width:36px;display:grid;place-items:center;border-radius:12px;color:var(--cyan);background:rgba(97,240,225,.1);border:1px solid rgba(97,240,225,.15);font-size:17px;flex-shrink:0}.fields{display:grid;grid-template-columns:1fr 1fr;gap:14px}.field{display:flex;flex-direction:column;gap:8px}.field label{font-size:11px;color:#b4b7d1;text-transform:uppercase;letter-spacing:.1em}.field input,.field select{width:100%;border:1px solid #373958;background:#111329;color:var(--text);padding:13px 14px;border-radius:13px;font-size:15px;outline:none;transition:.2s}.field input:focus,.field select:focus{border-color:var(--cyan);box-shadow:0 0 0 3px #61f0e11a}.result-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:18px}.metric{padding:15px;border-radius:16px;background:rgba(8,10,25,.55);border:1px solid var(--line)}.metric .label{font-size:11px;color:var(--muted);margin-bottom:9px}.metric .value{font-size:21px;font-weight:750;letter-spacing:-.03em}.metric .note{font-size:11px;color:var(--muted);margin-top:6px}.btnrow{display:flex;gap:10px;flex-wrap:wrap;margin-top:17px}.btn{border:0;cursor:pointer;border-radius:13px;padding:12px 16px;font-weight:750;font-size:12px;letter-spacing:.03em;transition:transform .15s,filter .15s}.btn:hover{transform:translateY(-1px);filter:brightness(1.07)}.primary{background:linear-gradient(100deg,var(--cyan),#a6ffe5);color:#10172a;box-shadow:0 8px 24px #61f0e11f}.secondary{background:#252744;color:#dfe1ff;border:1px solid #3c3f64}.table-wrap{overflow:auto;border:1px solid var(--line);border-radius:15px}.table{width:100%;border-collapse:collapse;min-width:420px}.table th,.table td{text-align:left;padding:13px 15px;border-bottom:1px solid rgba(177,178,255,.1);font-size:12px;white-space:nowrap}.table th{font-size:10px;letter-spacing:.11em;text-transform:uppercase;color:#a9adce;background:#15172d}.table tr:last-child td{border-bottom:0}.table td{color:#e8e9ff}.table td:last-child{color:var(--cyan);font-weight:700}.status{display:inline-block;border-radius:999px;padding:5px 8px;background:#61f0e115;color:var(--cyan);font-size:10px}.wide{grid-column:1/-1}.progressline{height:8px;border-radius:99px;background:#2b2d49;overflow:hidden;margin-top:12px}.progressline div{height:100%;width:0;background:linear-gradient(90deg,var(--cyan),var(--violet),var(--pink));border-radius:99px;transition:width .4s}.trade-controls{display:grid;grid-template-columns:1fr 1fr;gap:14px}.note-box{padding:14px 15px;background:rgba(255,215,138,.07);border:1px solid rgba(255,215,138,.19);border-radius:14px;color:#d7d1bb;font-size:12px;line-height:1.6;margin-top:16px}.footer{color:#777d9f;text-align:center;font-size:11px;line-height:1.7;margin-top:28px}.empty{text-align:center;color:var(--muted);padding:24px!important}.tag{font-size:10px;color:var(--violet);letter-spacing:.14em;text-transform:uppercase}.split{display:flex;justify-content:space-between;align-items:center;gap:10px}.mini{font-size:12px;color:var(--muted)}@media(max-width:850px){.hero,.layout{grid-template-columns:1fr}.hero-side{min-height:190px}.wide{grid-column:auto}}@media(max-width:520px){.wrap{padding:18px 13px 38px}.top{align-items:flex-start}.pill{font-size:10px}.hero-main,.hero-side,.card{padding:20px;border-radius:20px}.fields,.trade-controls{grid-template-columns:1fr}.brand h1{font-size:14px}.result-grid{gap:9px}.metric .value{font-size:18px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <div class="brand"><div class="logo">✦</div><div><h1>AURORA / GROWTH</h1><p>PERSONAL PERFORMANCE STUDIO</p></div></div>
+    <div class="pill">LOCAL MODE · NO SUPABASE</div>
+  </header>
+  <section class="hero">
+    <div class="glass hero-main">
+      <div class="eyebrow">30-day growth blueprint</div>
+      <h2>Build your plan.<br><span>Track every move.</span></h2>
+      <p class="sub">A separate premium dashboard for your ₹10,000 starting balance, 10% daily target and 30-day projection. Your records stay in this browser on this device.</p>
+    </div>
+    <div class="glass hero-side">
+      <div><div class="small-label">Projected balance · day 30</div><div class="big-num gradient-text" id="heroFinal">₹1,74,494</div><div class="mini">At 10% daily compounding, before any losses or withdrawals.</div></div>
+      <div class="target-row"><div><div class="small-label">Daily target</div><strong id="heroDaily">₹1,000</strong></div><div style="text-align:right"><div class="small-label">Plan length</div><strong>30 days</strong></div></div>
+    </div>
+  </section>
+
+  <div class="layout">
+    <section class="glass card">
+      <div class="card-head"><div><div class="tag">01 / plan settings</div><h3 style="margin-top:7px">Growth calculator</h3><p>Change the values to recalculate the full projection.</p></div><div class="iconbox">⌁</div></div>
+      <div class="fields">
+        <div class="field"><label for="startBalance">Starting balance (₹)</label><input id="startBalance" type="number" min="1" value="10000"></div>
+        <div class="field"><label for="growthRate">Daily growth target (%)</label><input id="growthRate" type="number" min="0" max="100" step="0.1" value="10"></div>
+        <div class="field"><label for="days">Plan duration (days)</label><input id="days" type="number" min="1" max="365" value="30"></div>
+        <div class="field"><label for="riskRate">Risk / stake reference (%)</label><select id="riskRate"><option value="1">1% per trade</option><option value="2">2% per trade</option><option value="3">3% per trade</option><option value="5">5% per trade</option></select></div>
+      </div>
+      <div class="result-grid">
+        <div class="metric"><div class="label">Daily target amount</div><div class="value" id="dailyTarget">₹1,000</div><div class="note">Based on current balance</div></div>
+        <div class="metric"><div class="label">Next reference stake</div><div class="value" id="stakeAmount">₹100</div><div class="note" id="stakeNote">1% of current balance</div></div>
+        <div class="metric"><div class="label">Projected final balance</div><div class="value" id="finalBalance">₹1,74,494</div><div class="note">Daily compounding estimate</div></div>
+        <div class="metric"><div class="label">Projected growth</div><div class="value" id="growthAmount">₹1,64,494</div><div class="note">Above starting balance</div></div>
+      </div>
+      <div class="btnrow"><button class="btn primary" id="recalc">Recalculate plan</button><button class="btn secondary" id="resetPlan">Reset defaults</button></div>
+    </section>
+
+    <section class="glass card">
+      <div class="card-head"><div><div class="tag">02 / daily execution</div><h3 style="margin-top:7px">Trade-count calculator</h3><p>Estimate how many trades are needed to approach the daily target using a fixed stake reference and 96% payout.</p></div><div class="iconbox">◎</div></div>
+      <div class="fields">
+        <div class="field"><label for="calcBalance">Current balance (₹)</label><input id="calcBalance" type="number" min="1" value="10000"></div>
+        <div class="field"><label for="tradePercent">Stake per trade (%)</label><select id="tradePercent"><option value="1">1% stake</option><option value="2">2% stake</option><option value="3">3% stake</option><option value="5">5% stake</option></select></div>
+        <div class="field"><label for="payout">Payout (%)</label><input id="payout" type="number" min="1" max="100" step="0.1" value="96"></div>
+        <div class="field"><label for="targetPercent">Daily target (%)</label><input id="targetPercent" type="number" min="0.1" max="100" step="0.1" value="10"></div>
+      </div>
+      <div class="result-grid">
+        <div class="metric"><div class="label">Target profit</div><div class="value" id="calcTarget">₹1,000</div><div class="note">For one day</div></div>
+        <div class="metric"><div class="label">Reference stake</div><div class="value" id="calcStake">₹100</div><div class="note">Percent of current balance</div></div>
+        <div class="metric"><div class="label">Net profit per win</div><div class="value" id="netWin">₹96</div><div class="note">At the selected payout</div></div>
+        <div class="metric"><div class="label">Wins to reach target</div><div class="value" id="winsNeeded">11</div><div class="note">Consecutive wins estimate; losses not included</div></div>
+      </div>
+      <div class="note-box">This calculator is a mathematical estimate, not a prediction. The required win count assumes every counted trade wins and uses a fixed stake based on the balance entered here; actual outcomes, changing stakes, fees and payout changes can produce very different results.</div>
+    </section>
+
+    <section class="glass card wide">
+      <div class="card-head"><div><div class="tag">03 / 30-day roadmap</div><h3 style="margin-top:7px">Compounding schedule</h3><p>Daily targets are calculated from the previous day's projected balance.</p></div><div class="iconbox">↗</div></div>
+      <div class="split"><div class="mini" id="scheduleCaption">30 checkpoints · 10% daily target</div><div class="status">PROJECTION</div></div>
+      <div class="progressline"><div id="planProgress"></div></div>
+      <div style="height:15px"></div>
+      <div class="table-wrap"><table class="table"><thead><tr><th>Day</th><th>Opening balance</th><th>Target profit</th><th>Target closing balance</th><th>Progress</th></tr></thead><tbody id="scheduleBody"></tbody></table></div>
+    </section>
+
+    <section class="glass card wide">
+      <div class="card-head"><div><div class="tag">04 / manual tracking</div><h3 style="margin-top:7px">Daily results log</h3><p>Record your actual closing balance for each day. This stays on this device only.</p></div><div class="iconbox">✎</div></div>
+      <div class="trade-controls">
+        <div class="field"><label for="logDay">Day number</label><select id="logDay"></select></div>
+        <div class="field"><label for="actualBalance">Actual closing balance (₹)</label><input id="actualBalance" type="number" min="0" placeholder="Enter closing balance"></div>
+      </div>
+      <div class="btnrow"><button class="btn primary" id="saveLog">Save daily result</button><button class="btn secondary" id="clearLogs">Clear saved results</button></div>
+      <div style="height:15px"></div>
+      <div class="table-wrap"><table class="table"><thead><tr><th>Day</th><th>Actual close</th><th>Change vs opening</th><th>Saved</th><th>Action</th></tr></thead><tbody id="logsBody"><tr><td colspan="5" class="empty">No daily results saved yet.</td></tr></tbody></table></div>
+    </section>
+  </div>
+  <div class="footer">AURORA GROWTH · PRIVATE LOCAL DASHBOARD<br>Projection only — trading can result in loss. Never treat a target or calculator as guaranteed income.</div>
+</div>
+<script>
+const $ = id => document.getElementById(id);
+const fmt = n => Number.isFinite(n) ? '₹' + Math.round(n).toLocaleString('en-IN') : '—';
+const money2 = n => Number.isFinite(n) ? '₹' + n.toLocaleString('en-IN',{minimumFractionDigits:2,maximumFractionDigits:2}) : '—';
+const DEFAULTS = {start:10000,rate:10,days:30,risk:1};
+let logs = {};
+try { logs = JSON.parse(localStorage.getItem('auroraGrowthLogs') || '{}') || {}; } catch(e) { logs = {}; }
+function getPlan(){
+  let start=Math.max(1,Number($('startBalance').value)||10000);
+  let rate=Math.max(0,Math.min(100,Number($('growthRate').value)||0));
+  let days=Math.max(1,Math.min(365,Math.floor(Number($('days').value)||30)));
+  let risk=Math.max(.1,Number($('riskRate').value)||1);
+  return {start,rate,days,risk};
+}
+function renderPlan(){
+  const p=getPlan(), r=p.rate/100;
+  let bal=p.start, rows='';
+  for(let d=1;d<=p.days;d++){
+    let profit=bal*r, close=bal+profit;
+    rows += `<tr><td>Day ${d}</td><td>${fmt(bal)}</td><td>${fmt(profit)}</td><td>${fmt(close)}</td><td><span class="status">${p.rate}% target</span></td></tr>`;
+    bal=close;
+  }
+  $('dailyTarget').textContent=fmt(p.start*r);
+  $('stakeAmount').textContent=fmt(p.start*p.risk/100);
+  $('stakeNote').textContent=p.risk+'% of starting balance';
+  $('finalBalance').textContent=fmt(bal);
+  $('growthAmount').textContent=fmt(bal-p.start);
+  $('heroFinal').textContent=fmt(bal);
+  $('heroDaily').textContent=fmt(p.start*r);
+  $('scheduleCaption').textContent=p.days+' checkpoints · '+p.rate+'% daily target';
+  $('scheduleBody').innerHTML=rows;
+  $('logDay').innerHTML=Array.from({length:p.days},(_,i)=>`<option value="${i+1}">Day ${i+1}</option>`).join('');
+  $('planProgress').style.width='100%';
+  renderLogs();
+}
+function renderTradeCalc(){
+  let bal=Math.max(1,Number($('calcBalance').value)||10000);
+  let stakePct=Math.max(.1,Number($('tradePercent').value)||1)/100;
+  let payout=Math.max(0,Math.min(100,Number($('payout').value)||96))/100;
+  let target=Math.max(.1,Number($('targetPercent').value)||10)/100;
+  let stake=bal*stakePct, targetAmount=bal*target, net=stake*payout;
+  $('calcTarget').textContent=fmt(targetAmount);
+  $('calcStake').textContent=money2(stake);
+  $('netWin').textContent=money2(net);
+  $('winsNeeded').textContent=net>0?Math.ceil(targetAmount/net):'—';
+}
+function renderLogs(){
+  let days=getPlan().days;
+  let entries=Object.entries(logs).map(([day,v])=>({day:Number(day),...v})).filter(x=>x.day>=1&&x.day<=days).sort((a,b)=>a.day-b.day);
+  if(!entries.length){$('logsBody').innerHTML='<tr><td colspan="5" class="empty">No daily results saved yet.</td></tr>';return;}
+  $('logsBody').innerHTML=entries.map(x=>{
+    const p=getPlan(); const opening=p.start*Math.pow(1+p.rate/100,Math.max(0,x.day-1));
+    const diff=x.balance-opening;
+    return `<tr><td>Day ${x.day}</td><td>${fmt(x.balance)}</td><td style="color:${diff>=0?'var(--cyan)':'var(--danger)'}">${diff>=0?'+':''}${fmt(diff)}</td><td>${x.date||'Saved'}</td><td><button class="btn secondary" style="padding:6px 9px" onclick="deleteLog(${x.day})">Delete</button></td></tr>`;
+  }).join('');
+}
+function deleteLog(day){delete logs[day];persistLogs();renderLogs();}
+function persistLogs(){try{localStorage.setItem('auroraGrowthLogs',JSON.stringify(logs));}catch(e){}}
+$('recalc').addEventListener('click',()=>{renderPlan();renderTradeCalc();});
+$('resetPlan').addEventListener('click',()=>{$('startBalance').value=DEFAULTS.start;$('growthRate').value=DEFAULTS.rate;$('days').value=DEFAULTS.days;$('riskRate').value=String(DEFAULTS.risk);$('calcBalance').value=DEFAULTS.start;$('tradePercent').value='1';$('payout').value='96';$('targetPercent').value='10';renderPlan();renderTradeCalc();});
+['startBalance','growthRate','days','riskRate'].forEach(id=>$(id).addEventListener('input',()=>{renderPlan();}));
+['calcBalance','tradePercent','payout','targetPercent'].forEach(id=>$(id).addEventListener('input',renderTradeCalc));
+$('saveLog').addEventListener('click',()=>{
+  let day=Number($('logDay').value), balance=Number($('actualBalance').value);
+  if(!day||!Number.isFinite(balance)||balance<0){alert('Please enter a valid closing balance.');return;}
+  logs[day]={balance,date:new Date().toLocaleDateString('en-IN')};persistLogs();renderLogs();$('actualBalance').value='';
+});
+$('clearLogs').addEventListener('click',()=>{
+  if(confirm('Clear all locally saved daily results?')){logs={};persistLogs();renderLogs();}
+});
+renderPlan();renderTradeCalc();
+</script>
+</body>
+</html>
